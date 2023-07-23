@@ -1,0 +1,125 @@
+.containter{
+    position:absolute;
+    top:0;
+}
+.settings{
+    position:absolute;
+    top:0;
+    height:100vh;
+    width: 100vw;
+    background-color:rgba(0,0,0,0.5);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+}
+.settings.active_1{
+    transform: scale(1);
+}
+
+
+.settings__window{
+    background-color: white;
+    width:40vw;
+    overflow: hidden;
+    border-radius: 35px;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    position:relative;
+}
+
+.settings__window.active_2{
+    animation:modal 0.3s linear forwards;
+}
+@keyframes modal {
+    0%{
+        height:0vh;
+    }
+    100%{
+        height:40vh;
+    }
+}
+
+
+.settings__window__flex{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+.settings form{
+    display: flex;
+    justify-content: space-between;
+    gap:6vh;
+    flex-direction: column;
+    text-align: center;
+    width:70%;
+}
+.settings h2{
+    margin:2vh;
+    font-size:calc(14px + 10 * (100vw / 1280));
+    position:relative;
+    position:absolute;
+    top:0;
+    left:0;
+    opacity:0;
+    animation: settings 0.3s linear 0.3s forwards;
+}
+@keyframes settings {
+    100%{
+        opacity:1;
+    }
+}
+
+
+
+.settings__window__flex__title{
+    display:flex;
+    flex-direction: column;
+}
+.settings__window__flex__title label{
+    margin:1vh;
+    font-size:calc(10px + 10 * (100vw / 1280));
+}
+#title{
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    width:70%;
+}
+#title-change{
+    height: calc(2.25rem + 2px);
+    width:30%;
+    cursor:pointer;
+    font-size:calc(5px + 10 * (100vw / 1280));
+}
+.settings__window__flex__title div{
+    display:flex;
+}
+
+
+
+.settings__window__flex__change{
+    padding:1vh;
+    border:2px dashed black;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+}
+.settings__window__flex__change label{
+    font-size:calc(10px + 10 * (100vw / 1280));
+}
+.settings__window__flex__change img{
+    width:4vw;
+}
+#change{
+    cursor:pointer;
+    position:absolute;
+    opacity:0;
+    z-index:2;
+    width:100%;
+    height:100%;
+}
