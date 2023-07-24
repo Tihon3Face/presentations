@@ -171,7 +171,8 @@ function App() {
 
 
     useEffect(() => {
-        const ol = document.querySelector('ol')
+        const ol = document.getElementsByTagName('ol')[0]
+        const btnDel = document.getElementsByClassName('delete__picture');
         function determineRatio() {
             const presentation = document.getElementsByClassName('presentation')[0];
             const deducedImg = document.getElementById('deduced-img');
@@ -192,14 +193,15 @@ function App() {
         }
         ol.addEventListener('click', determineRatio)
         window.addEventListener('mouseover', determineRatio)
+        window.removeEventListener('mouseout', determineRatio)
         window.addEventListener('resize', determineRatio)
         return () => {
             window.removeEventListener('resize', determineRatio)
             window.removeEventListener('mouseover', determineRatio)
+            window.removeEventListener('mouseout', determineRatio)
             ol.removeEventListener('click', determineRatio)
         };
-    }, []); 
-    
+    }, [isDeleted]); 
     
     return (
         <div className="container">
