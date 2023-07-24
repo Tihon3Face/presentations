@@ -84,16 +84,18 @@ function App() {
         const uploaded = document.getElementsByClassName('uploaded__picture');
         const picture = document.getElementsByClassName('to_deduce_picture');
         function funcDeduce (e) {
-            let id = 0
-            for (let item of uploaded){
-                if(item === e.target){
-                    setIdOfDeduce(id)
-                    setIsDeleted(true)
+            if([...uploaded].includes(e.target)){
+                let id = 0
+                for (let item of uploaded){
+                    if(item === e.target){
+                        setIdOfDeduce(id)
+                        setIsDeleted(true)
+                        const presentation = document.getElementsByClassName('presentation')[0];
+                        presentation.style.background = `url("${picture[id].src}") center/cover`
+                    }
+                    id++;
                 }
-                id++;
             }
-            const presentation = document.getElementsByClassName('presentation')[0];
-            presentation.style.background = `url("${picture[id-1].src}") center/cover`
         }
         ol.addEventListener('click', funcDeduce)
         
