@@ -77,8 +77,8 @@ function App() {
             }
         }
     }
-    const [idOfDeduce,setIdOfDeduce] = useState(-1);
     const [isDeleted,setIsDeleted] = useState(true);
+    const [idOfDeduce,setIdOfDeduce] = useState(-1);
     useEffect(() => {
         const ol = document.getElementsByTagName('ol')[0];
         const uploaded = document.getElementsByClassName('uploaded__picture');
@@ -104,22 +104,24 @@ function App() {
             return prevFiles
         });
 
-        if(addImg[idOfDeduce].id === Number(e.target.id)){
-            if(idOfDeduce === 0){
-                if(addImg.length === 1){
-                    setIsDeleted(false)
+        if(idOfDeduce > -1 && isDeleted){
+            if(addImg[idOfDeduce].id === Number(e.target.id)){
+                if(idOfDeduce === 0){
+                    if(addImg.length === 1){
+                        setIsDeleted(false)
+                    }else{
+                        setIdOfDeduce(idOfDeduce)
+                    }
                 }else{
-                    setIdOfDeduce(idOfDeduce)
+                    setIdOfDeduce(idOfDeduce-1)
                 }
-            }else{
-                setIdOfDeduce(idOfDeduce-1)
-            }
-        }else if(addImg[idOfDeduce].id !== Number(e.target.id)){
-            let compareElem = addImg.findIndex(item => item.id === Number(e.target.id))
-            if(compareElem > idOfDeduce){
-                setIdOfDeduce(idOfDeduce)
-            }else{
-                setIdOfDeduce(idOfDeduce-1)
+            }else if(addImg[idOfDeduce].id !== Number(e.target.id)){
+                let compareElem = addImg.findIndex(item => item.id === Number(e.target.id))
+                if(compareElem > idOfDeduce){
+                    setIdOfDeduce(idOfDeduce)
+                }else{
+                    setIdOfDeduce(idOfDeduce-1)
+                }
             }
         }
     };
@@ -219,5 +221,3 @@ function App() {
 }
 
 export default App;
-
-
