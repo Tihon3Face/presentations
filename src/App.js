@@ -77,12 +77,14 @@ function App() {
             }
         }
     }
+
     const [isDeleted,setIsDeleted] = useState(true);
     const [idOfDeduce,setIdOfDeduce] = useState(-1);
     useEffect(() => {
         const ol = document.getElementsByTagName('ol')[0];
         const uploaded = document.getElementsByClassName('uploaded__picture');
         const picture = document.getElementsByClassName('to_deduce_picture');
+        const presentation = document.getElementsByClassName('presentation')[0];
         function funcDeduce (e) {
             if([...uploaded].includes(e.target)){
                 let id = 0
@@ -90,8 +92,7 @@ function App() {
                     if(item === e.target){
                         setIdOfDeduce(id)
                         setIsDeleted(true)
-                        const presentation = document.getElementsByClassName('presentation')[0];
-                        presentation.style.background = `url("${picture[id].src}") center/cover`
+                        presentation.style.background = `url("${picture[id].src}") center/cover no-repeat`
                     }
                     id++;
                 }
@@ -108,23 +109,29 @@ function App() {
             prevFiles = prevFiles.filter((prevFile) => prevFile.id !== Number(e.target.id))
             return prevFiles
         });
-
+        const presentation = document.getElementsByClassName('presentation')[0];
+        const picture = document.getElementsByClassName('to_deduce_picture');
         if(idOfDeduce > -1 && isDeleted){
             if(addImg[idOfDeduce].id === Number(e.target.id)){
                 if(idOfDeduce === 0){
                     if(addImg.length === 1){
+                        presentation.style.background = `none`
                         setIsDeleted(false)
                     }else{
+                        presentation.style.background = `url("${picture[idOfDeduce+1].src}") center/cover`
                         setIdOfDeduce(idOfDeduce)
                     }
                 }else{
+                    presentation.style.background = `url("${picture[idOfDeduce-1].src}") center/cover`
                     setIdOfDeduce(idOfDeduce-1)
                 }
             }else if(addImg[idOfDeduce].id !== Number(e.target.id)){
                 let compareElem = addImg.findIndex(item => item.id === Number(e.target.id))
                 if(compareElem > idOfDeduce){
+                    presentation.style.background = `url("${picture[idOfDeduce].src}") center/cover`
                     setIdOfDeduce(idOfDeduce)
                 }else{
+                    presentation.style.background = `url("${picture[idOfDeduce].src}") center/cover`
                     setIdOfDeduce(idOfDeduce-1)
                 }
             }
@@ -150,6 +157,10 @@ function App() {
     function changeImg (content,newImg,setActive) {
         addImg.splice(addImg.findIndex(item => Number(content.id) === item.id),1,{id:content.id,title:content.title,picture:newImg})
         setActive(false);
+        const presentation = document.getElementsByClassName('presentation')[0];
+        if(idOfDeduce > -1 && isDeleted){
+            presentation.style.background = `url("${newImg}") center/cover`
+        }
     }
     function changeTitle (content,newValue,setActive,e) {
         e.preventDefault()
@@ -180,9 +191,11 @@ function App() {
             }
         }
         ol.addEventListener('click', determineRatio)
+        window.addEventListener('mouseover', determineRatio)
         window.addEventListener('resize', determineRatio)
         return () => {
             window.removeEventListener('resize', determineRatio)
+            window.removeEventListener('mouseover', determineRatio)
             ol.removeEventListener('click', determineRatio)
         };
     }, []); 
