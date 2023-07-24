@@ -64,6 +64,7 @@ img{
     filter:opacity(0);
 }
 .delete__picture,.change__picture{
+    z-index:1;
     bottom:0;
     right:0;
     border-radius: 0px;
