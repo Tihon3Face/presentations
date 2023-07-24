@@ -22,8 +22,8 @@ function AddImg({picture, uploadFile, isFile, removeFile, id, title}) {
                         isFile
                         ?
                         <div className='pictures__upload__settings'>
-                            <button className='change__picture' id={id}>Изменить</button>
-                            <button className='delete__picture' id={id} onClick={removeFile}>Удалить</button>
+                            <button className='change__picture' id={id} translate="no">Изменить</button>
+                            <button className='delete__picture' id={id} onClick={removeFile} translate="no">Удалить</button>
                         </div>
                         :
                         null
