@@ -82,3 +82,11 @@ h1{
 .presentation img{
     position:absolute;
 }
+.presentation__blur{
+    backdrop-filter: blur(20px);
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}

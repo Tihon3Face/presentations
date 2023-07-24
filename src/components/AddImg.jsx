@@ -7,7 +7,7 @@ function AddImg({picture, uploadFile, isFile, removeFile, id, title}) {
             <div className="pictures__margin">
                 <li></li>
                 <div className="pictures__board">
-                    <img  src={picture} alt="" />
+                    <img className='to_deduce_picture' src={picture} alt=""/>
                     <div className="pictures__upload">
                         {isFile ? <p className='unknown'>{title}</p> : <p className="upload">Загрузить</p>}
                         {

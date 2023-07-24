@@ -82,6 +82,7 @@ function App() {
     useEffect(() => {
         const ol = document.getElementsByTagName('ol')[0];
         const uploaded = document.getElementsByClassName('uploaded__picture');
+        const picture = document.getElementsByClassName('to_deduce_picture');
         function funcDeduce (e) {
             let id = 0
             for (let item of uploaded){
@@ -91,6 +92,8 @@ function App() {
                 }
                 id++;
             }
+            const presentation = document.getElementsByClassName('presentation')[0];
+            presentation.style.background = `url("${picture[id-1].src}") center/cover`
         }
         ol.addEventListener('click', funcDeduce)
         
@@ -210,7 +213,9 @@ function App() {
                 {
                     idOfDeduce > -1 && isDeleted
                     ?
-                    <img src={addImg[idOfDeduce].picture} alt='' id='deduced-img'/>
+                    <div className='presentation__blur'>
+                        <img src={addImg[idOfDeduce].picture} alt='' id='deduced-img'/>
+                    </div>
                     :
                     <h2>Файл не найден</h2>
                 }
