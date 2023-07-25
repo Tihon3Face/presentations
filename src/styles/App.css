@@ -36,6 +36,7 @@ h1{
 
 
 .pictures{
+    z-index:1;
     margin-top:12vh;
     width:27%;
     height:88vh;
@@ -43,7 +44,7 @@ h1{
     padding:4vh 4vw 0vh 4vw;
     display:flex;
     flex-direction: column;
-    background-color:#23232362;
+    background-color:#aaaaaa;
     overflow-y:auto;
 }
 .pictures h2{
