@@ -223,18 +223,24 @@ function App() {
                 if (presentation.offsetWidth > deducedImg.naturalWidth && presentation.offsetHeight > deducedImg.naturalHeight) {
                     deducedImg.style.width = 'auto';
                     deducedImg.style.height = 'auto';
-
+                    deducedImg.style.border = '2px solid white';
                 }else if(presentation.offsetWidth === deducedImg.naturalWidth && presentation.offsetHeight === deducedImg.naturalHeight){
                     deducedImg.style.width = '100%';
                     deducedImg.style.height = '100%';
                 } else if (preserntationRatio > deducedImgRatio) {
                     deducedImg.style.width = 'auto';
                     deducedImg.style.height = '100%';
-
+                    deducedImg.style.borderRight = '2px solid white';
+                    deducedImg.style.borderLeft = '2px solid white';
+                    deducedImg.style.borderTop = '0';
+                    deducedImg.style.borderBottom = '0';
                 } else if (preserntationRatio < deducedImgRatio) {
                     deducedImg.style.width = '100%';
                     deducedImg.style.height = 'auto';
-
+                    deducedImg.style.borderTop = '2px solid white';
+                    deducedImg.style.borderBottom = '2px solid white';
+                    deducedImg.style.borderRight = '0';
+                    deducedImg.style.borderLeft = '0';
                 }
             }
         }
