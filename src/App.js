@@ -249,10 +249,10 @@ function App() {
             const delta = Math.sign(event.deltaY);
             const picture = document.getElementsByClassName('to_deduce_picture');
             if (delta === 1 && idOfDeduce !== -1) {
-                    setIdOfDeduce((prevIndex) => (prevIndex === addImg.length - 1 ? prevIndex : prevIndex + 1 ));
+                    setIdOfDeduce(idOfDeduce === addImg.length - 1 ? idOfDeduce : idOfDeduce + 1 );
                     presentation.style.background = `url("${picture[addImg.length-1 === idOfDeduce ? idOfDeduce : idOfDeduce+1].src}") center/cover no-repeat`
             } else if (delta === -1 && idOfDeduce !== -1) {
-                    setIdOfDeduce((prevIndex) => (prevIndex === 0 ? prevIndex : prevIndex - 1));
+                    setIdOfDeduce(idOfDeduce === 0 ? idOfDeduce : idOfDeduce - 1);
                     presentation.style.background = `url("${picture[idOfDeduce === 0 ? idOfDeduce : idOfDeduce-1].src}") center/cover no-repeat`
             }
         }
@@ -261,7 +261,7 @@ function App() {
         return () => {
         presentation.removeEventListener('wheel', scrollEv)
         }
-    },[addImg,idOfDeduce,isDeleted])
+    },[addImg,idOfDeduce])
 
 
 
