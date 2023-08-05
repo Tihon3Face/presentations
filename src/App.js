@@ -3,7 +3,9 @@ import AddImg from './components/AddImg';
 import ModalImages from './components/ModalImages';
 import './styles/App.css';
 import { useEffect, useState } from 'react';
-import page from './components/page.png'
+import page from './images/page.png'
+import up from './images/up.png'
+import down from './images/down.png'
 
 function App() {
     useEffect(() => {
@@ -99,7 +101,6 @@ function App() {
             }
         }
         ol.addEventListener('click', funcDeduce)
-        
         return () => {
             ol.removeEventListener('click', funcDeduce)
         }
@@ -169,101 +170,98 @@ function App() {
     }
 
 
-
-    useEffect(() => {
-        const ol = document.getElementsByTagName('ol')[0]
+    function determineRatio() {
+        const deducedImg = document.getElementById('deduced-img');
         const presentation = document.getElementsByClassName('presentation')[0];
-        function determineRatio() {
-            const deducedImg = document.getElementById('deduced-img');
-            if (deducedImg) {
-                const preserntationRatio = presentation.offsetWidth / presentation.offsetHeight;
-                const deducedImgRatio = deducedImg.naturalWidth / deducedImg.naturalHeight;
-                if (presentation.offsetWidth > deducedImg.naturalWidth && presentation.offsetHeight > deducedImg.naturalHeight) {
-                    deducedImg.style.width = 'auto';
-                    deducedImg.style.height = 'auto';
-                    deducedImg.style.border = '2px solid white';
-                }else if(presentation.offsetWidth === deducedImg.naturalWidth && presentation.offsetHeight === deducedImg.naturalHeight){
-                    deducedImg.style.width = '100%';
-                    deducedImg.style.height = '100%';
-                } else if (preserntationRatio > deducedImgRatio) {
-                    deducedImg.style.width = 'auto';
-                    deducedImg.style.height = '100%';
-                    deducedImg.style.borderRight = '2px solid white';
-                    deducedImg.style.borderLeft = '2px solid white';
-                    deducedImg.style.borderTop = '0';
-                    deducedImg.style.borderBottom = '0';
-                } else if (preserntationRatio < deducedImgRatio) {
-                    deducedImg.style.width = '100%';
-                    deducedImg.style.height = 'auto';
-                    deducedImg.style.borderTop = '2px solid white';
-                    deducedImg.style.borderBottom = '2px solid white';
-                    deducedImg.style.borderRight = '0';
-                    deducedImg.style.borderLeft = '0';
-                }
+        if (deducedImg) {
+            const preserntationRatio = presentation.offsetWidth / presentation.offsetHeight;
+            const deducedImgRatio = deducedImg.naturalWidth / deducedImg.naturalHeight;
+            if (presentation.offsetWidth === deducedImg.naturalWidth && presentation.offsetHeight === deducedImg.naturalHeight) {
+                deducedImg.style.width = '100%';
+                deducedImg.style.height = '100%';
+                // deducedImg.style.border = '0px'
+            }else if(presentation.offsetWidth > deducedImg.naturalWidth && presentation.offsetHeight > deducedImg.naturalHeight){
+                deducedImg.style.width = 'auto';
+                deducedImg.style.height = 'auto';
+                // deducedImg.style.border = '2px solid white';
+            } else if (preserntationRatio > deducedImgRatio) {
+                deducedImg.style.width = 'auto';
+                deducedImg.style.height = '100%';
+                // deducedImg.style.borderRight = '2px solid white';
+                // deducedImg.style.borderLeft = '2px solid white';
+                // deducedImg.style.borderTop = '0';
+                // deducedImg.style.borderBottom = '0';
+            } else if (preserntationRatio < deducedImgRatio) {
+                deducedImg.style.width = '100%';
+                deducedImg.style.height = 'auto';
+                // deducedImg.style.borderTop = '2px solid white';
+                // deducedImg.style.borderBottom = '2px solid white';
+                // deducedImg.style.borderRight = '0';
+                // deducedImg.style.borderLeft = '0';
             }
         }
+    }
+    useEffect(() => {
+        const ol = document.getElementsByTagName('ol')[0]
         determineRatio()
         window.addEventListener('mouseover', determineRatio)
         window.addEventListener('resize', determineRatio)
         ol.addEventListener('click', determineRatio)
         return () => {
-            window.removeEventListener('mouseenter', determineRatio)
+            window.removeEventListener('mouseover', determineRatio)
             window.removeEventListener('resize', determineRatio)
             ol.removeEventListener('click', determineRatio)
         };
     }, []);
-    useEffect(() => {
-        const ol = document.getElementsByTagName('ol')[0]
+    const [background,setBackground] = useState()
+    function scrollEv(event){
         const presentation = document.getElementsByClassName('presentation')[0];
-        function determineRatio() {
-            const deducedImg = document.getElementById('deduced-img');
-            if (deducedImg) {
-                const preserntationRatio = presentation.offsetWidth / presentation.offsetHeight;
-                const deducedImgRatio = deducedImg.naturalWidth / deducedImg.naturalHeight;
-                if (presentation.offsetWidth > deducedImg.naturalWidth && presentation.offsetHeight > deducedImg.naturalHeight) {
-                    deducedImg.style.width = 'auto';
-                    deducedImg.style.height = 'auto';
-                    deducedImg.style.border = '2px solid white';
-                }else if(presentation.offsetWidth === deducedImg.naturalWidth && presentation.offsetHeight === deducedImg.naturalHeight){
-                    deducedImg.style.width = '100%';
-                    deducedImg.style.height = '100%';
-                } else if (preserntationRatio > deducedImgRatio) {
-                    deducedImg.style.width = 'auto';
-                    deducedImg.style.height = '100%';
-                    deducedImg.style.borderRight = '2px solid white';
-                    deducedImg.style.borderLeft = '2px solid white';
-                    deducedImg.style.borderTop = '0';
-                    deducedImg.style.borderBottom = '0';
-                } else if (preserntationRatio < deducedImgRatio) {
-                    deducedImg.style.width = '100%';
-                    deducedImg.style.height = 'auto';
-                    deducedImg.style.borderTop = '2px solid white';
-                    deducedImg.style.borderBottom = '2px solid white';
-                    deducedImg.style.borderRight = '0';
-                    deducedImg.style.borderLeft = '0';
-                }
-            }
-        }
-        function scrollEv(event){
-
+        if(event.target.closest('.presentation') === presentation){
             const delta = Math.sign(event.deltaY);
             const picture = document.getElementsByClassName('to_deduce_picture');
             if (delta === 1 && idOfDeduce !== -1) {
-                    setIdOfDeduce(idOfDeduce === addImg.length - 1 ? idOfDeduce : idOfDeduce + 1 );
-                    presentation.style.background = `url("${picture[addImg.length-1 === idOfDeduce ? idOfDeduce : idOfDeduce+1].src}") center/cover no-repeat`
+                setIdOfDeduce(idOfDeduce === addImg.length - 1 ? idOfDeduce : idOfDeduce + 1 );
+                setBackground(`url("${picture[addImg.length-1 === idOfDeduce ? idOfDeduce : idOfDeduce+1].src}") center/cover no-repeat`);
             } else if (delta === -1 && idOfDeduce !== -1) {
-                    setIdOfDeduce(idOfDeduce === 0 ? idOfDeduce : idOfDeduce - 1);
-                    presentation.style.background = `url("${picture[idOfDeduce === 0 ? idOfDeduce : idOfDeduce-1].src}") center/cover no-repeat`
+                setIdOfDeduce(idOfDeduce === 0 ? idOfDeduce : idOfDeduce - 1);
+                setBackground(`url("${picture[idOfDeduce === 0 ? idOfDeduce : idOfDeduce-1].src}") center/cover no-repeat`)
             }
         }
+    }
+    useEffect(() => {
         determineRatio()
-        presentation.addEventListener('wheel', scrollEv)
+        window.addEventListener('wheel', scrollEv)
         return () => {
-        presentation.removeEventListener('wheel', scrollEv)
+            window.removeEventListener('wheel', scrollEv)
         }
-    },[addImg,idOfDeduce])
-
-
+    },[scrollEv])
+    function getTransition (event) {
+        const transitionElems = document.getElementsByClassName('presentation__transbtn');
+        const transitionImg = document.querySelectorAll('.presentation__transbtn img');
+        const picture = document.getElementsByClassName('to_deduce_picture');
+        if(event.target.closest('.presentation__transbtn') === transitionElems[0]){
+            setIdOfDeduce(idOfDeduce === 0 ? idOfDeduce : idOfDeduce - 1);
+            setBackground(`url("${picture[idOfDeduce === 0 ? idOfDeduce : idOfDeduce-1].src}") center/cover no-repeat`)
+        }else if(event.target.closest('.presentation__transbtn') === transitionElems[1]){
+            setIdOfDeduce(idOfDeduce === addImg.length - 1 ? idOfDeduce : idOfDeduce + 1 );
+            setBackground(`url("${picture[addImg.length-1 === idOfDeduce ? idOfDeduce : idOfDeduce+1].src}") center/cover no-repeat`);
+        }
+    }
+    useEffect(() => {
+        const transitionParent = document.getElementsByClassName('presentation__updown')[0];
+        const presentation = document.getElementsByClassName('presentation')[0]
+        if(idOfDeduce > -1 && isDeleted){
+            transitionParent.style.transition = '0s'
+            transitionParent.style.filter = 'opacity(1)'
+        }else{
+            transitionParent.style.transition = '0s'
+            transitionParent.style.filter = 'opacity(0)'
+        }
+        transitionParent.addEventListener('click', getTransition);
+        return () => {
+            transitionParent.removeEventListener('click', getTransition);
+        }
+    },[getTransition])
 
     return (
         <div className="container">
@@ -288,7 +286,7 @@ function App() {
                 </ol>
             </div>
             <ModalImages active={activeModal} setActive={setActiveModal} content={addImg} changeImg={changeImg} changeTitle={changeTitle}/>
-            <div className="presentation">
+            <div className="presentation" style={{background:background}}>
                 {
                     idOfDeduce > -1 && isDeleted
                     ?
@@ -298,6 +296,10 @@ function App() {
                     :
                     <h2>Файл не найден</h2>
                 }
+                <div className='presentation__updown'>
+                    <div className='presentation__transbtn'><img src={up} alt=''/></div>
+                    <div className='presentation__transbtn'><img src={down} alt=''/></div>
+                </div>
             </div>
         </div>
     );

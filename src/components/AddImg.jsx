@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 function AddImg({picture, uploadFile, isFile, removeFile, id, title}) {
     return (
             <div className="pictures__margin">
-                <li></li>
+                <li key={id}></li>
                 <div className="pictures__board">
                     <img className='to_deduce_picture' src={picture} alt=""/>
                     <div className="pictures__upload">
