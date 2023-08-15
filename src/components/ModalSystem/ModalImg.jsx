@@ -25,7 +25,7 @@ function ModalImg({active,setActive,content,changeImg,changeTitle}) {
         }
     }
     return (
-        <div className={active ? 'settings active_1' : 'settings'} onClick={() => setActive(false)}>
+        <div className={active ? 'modal-windows__settings active_1' : 'modal-windows__settings'} onClick={() => setActive(false)}>
             <div className={active ? 'settings__window active_2': 'settings__window'} onClick={(e) => e.stopPropagation()}>
                 <div className="settings__window__flex">
                     <h2>Настройки</h2>

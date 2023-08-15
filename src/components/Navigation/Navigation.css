@@ -1,0 +1,16 @@
+.navigation{
+    height:12vh;
+    width:100vw;
+    background-color: rgb(207, 65, 65);
+    box-shadow: black 0px 3px 6px;
+    position:fixed;
+    z-index:2;
+
+
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+.navigation h1{
+    font-size:calc(20px + 13 * (100vw / 1280));
+}

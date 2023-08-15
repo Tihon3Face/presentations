@@ -4,7 +4,7 @@ import ModalImg from './ModalImg';
 
 function ModalImages({active,setActive,content,changeImg,changeTitle}) {
     return (
-        <div className='containter'>
+        <div className='modal-windows'>
             {
                 content.map((item,index) => {
                     if(item['id'] === Number(active.ide)){

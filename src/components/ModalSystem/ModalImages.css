@@ -1,8 +1,8 @@
-.containter{
+.modal-windows{
     position:absolute;
     top:0;
 }
-.settings{
+.modal-windows__settings{
     z-index:1;
     position:absolute;
     top:0;
@@ -14,7 +14,7 @@
     align-items: center;
     transform: scale(0);
 }
-.settings.active_1{
+.modal-windows__settings.active_1{
     transform: scale(1);
 }
 
@@ -49,7 +49,7 @@
     align-items: center;
     width:100%;
 }
-.settings form{
+.modal-windows__settings form{
     display: flex;
     justify-content: space-between;
     gap:6vh;
@@ -57,7 +57,7 @@
     text-align: center;
     width:70%;
 }
-.settings h2{
+.modal-windows__settings h2{
     margin:2vh;
     font-size:calc(14px + 10 * (100vw / 1280));
     position:relative;
