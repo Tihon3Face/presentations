@@ -1,0 +1,5 @@
+{
+    "port":5000,
+    "jwtSecret":"grandpa",
+    "mongoUri":"mongodb+srv://3Face:3Face123456@cluster0.i4wgkit.mongodb.net/presentations?retryWrites=true&w=majority"
+}

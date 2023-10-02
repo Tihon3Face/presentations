@@ -19,7 +19,7 @@
 }
 
 
-.settings__window{
+.modal-windows__window{
     background-color: white;
     width:40vw;
     overflow: hidden;
@@ -30,7 +30,7 @@
     position:relative;
 }
 
-.settings__window.active_2{
+.modal-windows__window.active_2{
     animation:modal 0.3s linear forwards;
 }
 @keyframes modal {
@@ -43,13 +43,13 @@
 }
 
 
-.settings__window__flex{
+.modal-windows__flex{
     display:flex;
     justify-content: center;
     align-items: center;
     width:100%;
 }
-.modal-windows__settings form{
+.modal-windows__common-form{
     display: flex;
     justify-content: space-between;
     gap:6vh;
@@ -57,7 +57,7 @@
     text-align: center;
     width:70%;
 }
-.modal-windows__settings h2{
+.modal-windows__modal-name{
     margin:2vh;
     font-size:calc(14px + 10 * (100vw / 1280));
     position:relative;
@@ -75,33 +75,33 @@
 
 
 
-.settings__window__flex__title{
+.modal-windows__change-title-form{
     display:flex;
     flex-direction: column;
 }
-.settings__window__flex__title label{
+.modal-windows__change-title-form label{
     margin:1vh;
     font-size:calc(10px + 10 * (100vw / 1280));
 }
-#title{
+.modal-windows__set-title{
     height: calc(2.25rem + 2px);
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     width:70%;
 }
-#title-change{
+.modal-windows__change-title-btn{
     height: calc(2.25rem + 2px);
     width:30%;
     cursor:pointer;
     font-size:calc(5px + 10 * (100vw / 1280));
 }
-.settings__window__flex__title div{
+.modal-windows__change-title-form div{
     display:flex;
 }
 
 
 
-.settings__window__flex__change{
+.modal-windows__change-img-form{
     padding:1vh;
     border:2px dashed black;
     display:flex;
@@ -110,13 +110,13 @@
     align-items: center;
     position:relative;
 }
-.settings__window__flex__change label{
+.modal-windows__change-img-form label{
     font-size:calc(10px + 10 * (100vw / 1280));
 }
-.settings__window__flex__change img{
+.modal-windows__change-icon{
     width:4vw;
 }
-#change{
+.modal-windows__set-img{
     cursor:pointer;
     position:absolute;
     opacity:0;

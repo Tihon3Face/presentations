@@ -1,0 +1,134 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family:sans-serif;
+}
+
+
+/* Фундаментальные стили */
+.container{
+    overflow: hidden;
+    display:flex;
+    width:100vw;
+    height:100vh;
+    position:relative;
+}
+.margin-top{
+    margin-top:100px;
+}
+.lateral-side{
+    height:calc(100vh - 100px);
+    background-color:#aaaaaa;
+}
+.main-side{
+    height:calc(100vh - 100px);
+}
+@media(max-width:450px){
+    .margin-top{
+        margin-top:12vh;
+    }
+    .lateral-side{
+        height:calc(100vh - 12vh);
+    }
+    .main-side{
+        height:calc(100vh - 12vh);
+    }
+}
+.flex-center{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+
+/* Лого */
+.logo{
+    font-size: calc(20px + 35 * (100vw / 1280));
+    color:black;
+    font-family:'Montserrat';
+    -webkit-text-stroke-width:0.1vw;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.486);
+    -webkit-text-stroke-color: rgba(109, 26, 26, 0.747);
+    text-decoration: none;
+}
+
+
+/* Карточка со слайдом или без */
+.card-board{
+    background-color: white;
+    border:black solid 2px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin:auto;
+    width:300px;
+    height:180px;
+    position:relative;
+}
+@media (max-width:400px){
+    .card-board{
+        width:150px;
+        height:auto;
+    }
+}
+.card-picture{
+    width:100%;
+    height:100%;
+}
+.card-settings{
+    position:absolute;
+    right:0;
+    bottom:0;
+}
+.card-blur{
+    display:flex;
+    position:absolute;
+    width:100%;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+    overflow:hidden;
+}
+.card-blur:hover{
+    backdrop-filter:blur(4px);
+}
+.card-button{
+    bottom:0;
+    right:0;
+    border:none;
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+    cursor:pointer;
+    padding: 2px;
+    background-color:#cecece;
+    font-size:20px;
+}
+@media (max-width:400px){
+    .card-button{
+        font-size:15px;
+    }
+}
+.card-button:hover{
+    background-color:#b9b9b9;
+}
+.card-button:active{
+    background-color:#dadada;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

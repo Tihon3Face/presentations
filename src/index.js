@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './styles/App.css';
+import store from './redux/store';
+import { Provider } from 'react-redux';
+import './App.css';
 
-// Use createRoot from "react-dom/client" to render your app
 const rootElement = document.getElementById('root');
 const root = ReactDOM.createRoot(rootElement);
 
-// Render the App component inside the root
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={store}>
+        <App/>
+    </Provider>
 );

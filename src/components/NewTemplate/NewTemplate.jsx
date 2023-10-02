@@ -3,29 +3,30 @@ import AddImg from '../olSystem/AddImg';
 import ModalImages from '../ModalSystem/ModalImages';
 import './NewTemplate.css';
 import { useEffect, useState } from 'react';
-import page from '../../images/page.png'
-import up from '../../images/up.png'
-import down  from '../../images/down.png'
+import page from './images/page.png'
+import up from './images/up.png'
+import down  from './images/down.png'
+import back  from './images/back.png'
+import axios from 'axios';
+import Navigation from '../Navigation/Navigation';
 
 function NewTemplate() {
     useEffect(() => {
-        // const upload = document.getElementsByClassName('pictures__upload-btn');
+        // const upload = document.getElementsByClassName('pictures__upload-or-deduce-btn');
         const inputs = document.getElementsByClassName('pictures__upload-picture');
         const ol = document.querySelector('ol');
         const pUpload = document.getElementsByClassName('pictures__upload-file');
         const pUnknown = document.getElementsByClassName('pictures__unknown-file');
         const uploaded = document.getElementsByClassName('pictures__uploaded-picture');
         const MouseOver = (e) => {
-            let index = 0;
             for (let item of inputs){
                 if(item === e.target){
                     // upload[index].style.transition = '0s';
-                    pUpload[index].style.transition = '0s';
-                    pUpload[index].style.filter = `blur(0px)`;
+                    pUpload[0].style.transition = '0s';
+                    pUpload[0].style.filter = `blur(0px)`;
                 }
-                index++;
             }
-            index = 0;
+            let index = 0;
             for (let item of uploaded){
                 if(item === e.target){
                     // upload[index].style.transition = '0s';
@@ -36,21 +37,19 @@ function NewTemplate() {
             }
         }
         const MouseOut = (e) => {
-            let index = 0;
             for (let item of inputs){
                 if(item === e.target){
                     // upload[index].style.transition = '0.4s';
-                    pUpload[index].style.transition = '0.4s';
-                    pUpload[index].style.filter = `blur(30px)`;   
+                    pUpload[0].style.transition = '0.5s';
+                    pUpload[0].style.filter = `blur(100px)`;   
                 }
-                index++;
             }
-            index = 0;
+            let index = 0;
             for (let item of uploaded){
                 if(item === e.target){
                     // upload[index].style.transition = '0.4s';
-                    pUnknown[index].style.transition = '0.4s';
-                    pUnknown[index].style.filter = `blur(30px)`;
+                    pUnknown[index].style.transition = '0.5s';
+                    pUnknown[index].style.filter = `blur(100px)`;
                 }
                 index++;
             }
@@ -77,21 +76,22 @@ function NewTemplate() {
         reader.readAsDataURL(file);
         reader.onload = function () {
             if((file.type).includes('image')){
-                setAddImg((prev) => [...prev,{id:Date.now(), picture:reader.result, title:'Без имени'}])
+                setAddImg((prev) => [...prev,{id:Date.now(), url:reader.result, title:'Без имени'}])
             }else{
                 alert('Вы не можете загружать какой-либо файл, кроме картинки.');
             }
         }
     }
-
     
+
+
     const [background,setBackground] = useState()
     const [deduceIndex,setDeduceIndex] = useState(-1);
     const [isDeleted,setIsDeleted] = useState(true);
     useEffect(() => {
         const ol = document.getElementsByTagName('ol')[0];
         const uploaded = document.getElementsByClassName('pictures__uploaded-picture');
-        const picture = document.getElementsByClassName('pictures__picture');
+        const picture = document.getElementsByClassName('card-picture');
         function funcDeduce (e) {
             [...uploaded].forEach((item,index) => {
                 if(item === e.target){
@@ -102,18 +102,17 @@ function NewTemplate() {
             })
         }
         ol.addEventListener('click', funcDeduce)
-
         return () => {
             ol.removeEventListener('click', funcDeduce)
 
         }
-    },[addImg])
+    },[])
     function removeFile (e) {
         setAddImg((prevFiles) => {
             prevFiles = prevFiles.filter((prevFile) => prevFile.id !== Number(e.target.id))
             return prevFiles
         });
-        const picture = document.getElementsByClassName('pictures__picture');
+        const picture = document.getElementsByClassName('card-picture');
         if(deduceIndex > -1 && isDeleted){
             if(addImg[deduceIndex].id === Number(e.target.id)){
                 if(deduceIndex === 0){
@@ -143,7 +142,7 @@ function NewTemplate() {
 
 
 
-    const [activeModal,setActiveModal] = useState(false);
+    const [activeModal,setActiveModal] = useState(true);
     useEffect(() => {
         const modalBtns = document.getElementsByClassName('pictures__change-picture');
         const ol = document.querySelector('ol');
@@ -158,14 +157,14 @@ function NewTemplate() {
         }
     },[])
     function changeImg (content,newImg,setActive) {
-        addImg.splice(addImg.findIndex(item => Number(content.id) === item.id),1,{id:content.id,title:content.title,picture:newImg})
+        addImg.splice(addImg.findIndex(item => Number(content.id) === item.id),1,{id:content.id,title:content.title,url:newImg})
         setActive(false);
         if((deduceIndex > -1 && isDeleted) && deduceIndex === addImg.findIndex(item => item.id === content.id)){
             setBackground(`url("${newImg}") center/cover`);
         }
     }
     function changeTitle (content,newValue,setActive) {
-        addImg.splice(addImg.findIndex(item => Number(content.id) === item.id),1,{id:content.id,title:newValue,picture:content.picture})
+        addImg.splice(addImg.findIndex(item => Number(content.id) === item.id),1,{id:content.id,title:newValue,url:content.url})
         setActive(false)
     }
 
@@ -218,7 +217,7 @@ function NewTemplate() {
         const presentation = document.getElementsByClassName('presentation')[0];
         if(event.target.closest('.presentation') === presentation){
             const delta = Math.sign(event.deltaY);
-            const picture = document.getElementsByClassName('pictures__picture');
+            const picture = document.getElementsByClassName('card-picture');
             if (delta === 1 && deduceIndex !== -1) {
                 setDeduceIndex(deduceIndex === addImg.length - 1 ? deduceIndex : deduceIndex + 1 );
                 setBackground(`url("${picture[addImg.length-1 === deduceIndex ? deduceIndex : deduceIndex+1].src}") center/cover no-repeat`);
@@ -237,8 +236,7 @@ function NewTemplate() {
     },[scrollEv])
     function getTransition (event) {
         const transitionElems = document.getElementsByClassName('presentation__transbtn');
-        const picture = document.getElementsByClassName('pictures__picture');
-        console.log(picture)
+        const picture = document.getElementsByClassName('card-picture');
         if(event.target.closest('.presentation__transbtn') === transitionElems[0]){
             setDeduceIndex(deduceIndex === 0 ? deduceIndex : deduceIndex - 1);
             setBackground(`url("${picture[deduceIndex === 0 ? deduceIndex : deduceIndex-1].src}") center/cover no-repeat`)
@@ -261,40 +259,106 @@ function NewTemplate() {
         }
     },[getTransition])
 
+
+
+    // async function fetchImages () {
+    //     const response = await axios.get('https://jsonplaceholder.typicode.com/photos')
+    //     let arr = []
+    //     for(let i = 0; i < 15; i++){
+    //         arr.push({...response.data[Math.floor(Math.random() * response.data.length)], title:'Без имени'})
+    //     }
+    //     setAddImg(arr)
+    // }
+    useEffect(() => {
+        if(deduceIndex > -1 && isDeleted){
+            setBackground(`url("${addImg[deduceIndex].url}") center/cover`);
+
+        }
+    },[addImg])
+
+
+
+    const [optionsBtn,setOptionsBtn] = useState(window.innerWidth <= 1600);
+    useEffect(() => {
+        const optionsOpenBtn = document.getElementsByClassName('options-btn')[0]
+        const optionsCloseBtn = document.getElementsByClassName('options__btn')[0]
+        const options = document.getElementsByClassName('pictures')[0]
+
+        function openOptions () {
+            options.style.left = '0';
+            options.style.animation = 'open 0.5s ease 1 forwards'
+        }
+
+        function closeOptions (e) {
+            if(e.target.closest('.options__btn')){
+                options.style.left = '0';
+                options.style.animation = 'close 0.5s ease 1 forwards'
+            }
+        }
+        function displayCloseBtn () {
+            if(window.innerWidth <= 1600){
+                options.style.animation = 'none'
+                options.style.left = '-450px'
+                setOptionsBtn(true)
+            }else{
+                setOptionsBtn(false)
+                options.style.animation = 'none'
+                options.style.left = '0'
+            }
+        }
+        displayCloseBtn()
+        
+        optionsOpenBtn.addEventListener('click', openOptions)
+        options.addEventListener('click', closeOptions)
+        window.addEventListener('resize', displayCloseBtn)
+        return () => {
+            optionsOpenBtn.removeEventListener('click', openOptions)
+            options.removeEventListener('click', closeOptions)
+            window.removeEventListener('resize', displayCloseBtn)
+        }
+    },[])
+
     return (
         <div className="container">
-            <div className="pictures margin-top">
-                <h2 className='pictures__h2'>Слайды</h2>
+            <Navigation/>
+            <div className="pictures lateral-side margin-top ">
+                <h2 className='pictures__h2'>Слайды{/*<button onClick={fetchImages}>Add random files</button>*/}</h2>
+                {
+                        optionsBtn
+                        ?
+                        <div className='options__btn'><img className='options__btn_img' src={back} alt="" /></div>
+                        :
+                        null
+                }
                 <ol className='pictures__ol'>
-
                     {
                         addImg.map((file,index) =>
-                                <AddImg key={index} picture={file.picture} id={file.id} isFile={true} removeFile={removeFile} title={file.title}/>
+                                <AddImg key={index} picture={file.url} id={file.id} isFile={true} removeFile={removeFile} title={file.title} /*fetchImages={fetchImages}*//>
                         )
                     }
 
                     {
                         addImg.length !== 15
                         ?
-                            <AddImg picture={page} uploadFile={uploadFile} isFile={false}/>
+                            <AddImg  picture={page} uploadFile={uploadFile} isFile={false}/>
                         :
                         null
                     }
+
                 </ol>
             </div>
+            <div className='options-btn margin-top'><img className='options-btn__img' src={back} alt="" /></div>
             <ModalImages active={activeModal} setActive={setActiveModal} content={addImg} changeImg={changeImg} changeTitle={changeTitle}/>
-            <div className="presentation" style={{background:background}}>
+            <div className="presentation main-side margin-top" style={{background:background}}>
                 {
                     deduceIndex > -1 && isDeleted
                     ?
                     addImg.map((item,index) => {
                         if(index === deduceIndex){
-                        return  <div className='presentation__backblur'>
-                                    <img className='presentation__deduced-img' src={addImg[deduceIndex].picture} alt=''/>
-                                </div>
-                        }else{
-                            return;
-                        }
+                            return  <div className='presentation__backblur' key={Date.now()}>
+                                        <img className='presentation__deduced-img' src={addImg[deduceIndex].url} alt=''/>
+                                    </div>
+                            }
                     })
                     :
                     <h2>Файл не найден</h2>

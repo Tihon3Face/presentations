@@ -1,16 +1,40 @@
 .navigation{
-    height:12vh;
+    height:100px;
     width:100vw;
     background-color: rgb(207, 65, 65);
     box-shadow: black 0px 3px 6px;
     position:fixed;
-    z-index:2;
+    z-index:3;
+    padding:1vw;
 
 
     display:flex;
     align-items:center;
-    justify-content: center;
+    justify-content: space-between;
 }
-.navigation h1{
-    font-size:calc(20px + 13 * (100vw / 1280));
+@media(max-width:450px){
+    .navigation{
+        height:12vh;
+    }
+}
+
+
+.links{
+    display:flex;
+    height: 100%;
+    align-items: center;
+}
+
+
+.links__link{
+    font-size: calc(10px + 12.5 * (100vw / 1280));
+    text-decoration: none;
+    color:black;
+    font-weight:bold;
+    padding:calc(10px + 5 * (100vw / 1280));
+    transition: 0.1s;
+}
+.links__link:hover{
+    box-shadow: 0px 10px 30px black;
+    border-bottom:2px solid white;
 }
