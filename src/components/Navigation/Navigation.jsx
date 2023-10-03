@@ -25,13 +25,13 @@ function Navigation() {
                     isAuthenticated && isLogout
                     ?
                     <div>
-                        <Link to="/main" className='links__link links__home'>Главная</Link>
+                        <Link to="/presentations" className='links__link links__home'>Главная</Link>
                         <Link to="/new_template" className='links__link links__settings'>Настройки</Link>
-                        <Link to="/main" className='links__link links__settings' onClick={logoutHandler}>Выйти</Link>
+                        <Link to="/presentations" className='links__link links__settings' onClick={logoutHandler}>Выйти</Link>
                     </div>
                     :
                     <div>
-                        <Link to="/main" className='links__link links__home'>Главная</Link>
+                        <Link to="/presentations" className='links__link links__home'>Главная</Link>
                         <Link to="/new_template" className='links__link links__settings'>Настройки</Link>
                         <Link to="/sign_in" className='links__link links__sign-in'>Войти</Link>
                         <Link to="/sign_up" className='links__link links__sign-up'>Зарегистрироваться</Link>
