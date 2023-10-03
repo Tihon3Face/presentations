@@ -21,7 +21,7 @@ function SignInPage() {
         try{
             const data = await request('/api/auth/login', 'POST', {...form})
             auth.login(data.token,data.userId)
-            navigate('/')
+            navigate('/presentations')
         }catch(e){
         }
     }
@@ -81,7 +81,7 @@ function SignInPage() {
                 adaptiveBtn
                 ?
                 <div className="back-btn" title='Назад'>
-                    <Link to='/'><img className="back-img" src={back} alt="" /></Link>
+                    <Link to='/presentations'><img className="back-img" src={back} alt="" /></Link>
                 </div>
                 :
                 null
@@ -95,7 +95,7 @@ function SignInPage() {
                             title='Домой'
                             style={{borderBottom:'none'}}
                         >
-                        <Link to='/'><img className="back-img" src={back} alt="" /></Link>
+                        <Link to='/presentations'><img className="back-img" src={back} alt="" /></Link>
                     </div>
                         <p className='logo'>PRESENTATIONS</p> 
                     </div>

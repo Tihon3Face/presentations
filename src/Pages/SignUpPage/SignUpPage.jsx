@@ -20,7 +20,7 @@ function SignUpPage() {
             await request('/api/auth/register', 'POST', {...form})
             const data = await request('/api/auth/login', 'POST', {...form})
             auth.login(data.token,data.userId)
-            navigate('/')
+            navigate('/presentations')
         }catch(e){
         }
     }
@@ -80,7 +80,7 @@ function SignUpPage() {
                 adaptiveBtn
                 ?
                 <div className="back-btn" title='Домой'>
-                    <Link to='/'><img className="back-img" src={back} alt="" /></Link>
+                    <Link to='/presentations'><img className="back-img" src={back} alt="" /></Link>
                 </div>
                 :
                 null
@@ -94,7 +94,7 @@ function SignUpPage() {
                             title='Домой'
                             style={{borderBottom:'none'}}
                         >
-                        <Link to='/'><img className="back-img" src={back} alt="" /></Link>
+                        <Link to='/presentations'><img className="back-img" src={back} alt="" /></Link>
                     </div>
                         <p className='logo'>PRESENTATIONS</p> 
                     </div>
