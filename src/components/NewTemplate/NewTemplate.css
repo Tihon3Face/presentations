@@ -85,8 +85,9 @@
     .presentation{
         width: 100vw;
     }
-    .presentation__backblur{
-        width: 100vw;
+    .pictures{
+        left:-450px;
+        position:absolute;
     }
 }
 
