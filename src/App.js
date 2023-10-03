@@ -33,7 +33,7 @@ function App() {
         <AuthContext.Provider value={{token,login,logout,userId,isAuthenticated}}>
             <BrowserRouter>
                     <Routes>
-                        <Route exact path='/' element={<HomePage/>} />
+                        <Route exact path='/main' element={<HomePage/>} />
                         <Route path='/new_template' element={<NewTemplate/>}/>
                         <Route path='/sign_in' element={<SignInPage/>} />
                         <Route path='/sign_up' element={<SignUpPage/>}/>
