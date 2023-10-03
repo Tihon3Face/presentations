@@ -92,17 +92,15 @@
         width:100vw;
         border-right:none;
     }
-}
-@media (max-width:350px){
     .options-btn{
-        width: 75px;
-        height: 75px;
+        width: 20vw;
+        height: 20vw;
     }
     .options__btn{
-        width: 75px;
-        height: 75px;
+        width: 20vw;
+        height: 20vw;
     }
     .projects{
-        width:calc(100% - 75px);
+        width:calc(100% - 20vw)
     }
 }

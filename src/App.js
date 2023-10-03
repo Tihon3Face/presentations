@@ -8,7 +8,6 @@ import SignUpPage from './Pages/SignUpPage/SignUpPage';
 import SignInPage from './Pages/SignInPage/SignInPage';
 import { useAuth } from './hooks/auth.hook';
 import { useDispatch, useSelector } from 'react-redux';
-import uzb from './183603645.jpg'
 
 
 
@@ -40,9 +39,7 @@ function App() {
                         <Route path='/sign_up' element={<SignUpPage/>}/>
                     </Routes>
             </BrowserRouter>
-
-            <img src={uzb} style={{position:"fixed", width: "100vw", height:"100vh", zIndex:"3421342",filter:"opacity(0.1)",top:'0'}}/>
-            <div>
+            {/* <div>
                 <button onClick={() => addCustomer(prompt())}>Добавить</button>
                 <h1>Почётные долбоёбы:</h1>
                 {
@@ -57,7 +54,7 @@ function App() {
                     <h1>нет их еблан</h1>
                 }
                 
-            </div>
+            </div> */}
         </AuthContext.Provider>
 
     );
