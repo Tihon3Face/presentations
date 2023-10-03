@@ -85,6 +85,9 @@
     .presentation{
         width: 100vw;
     }
+    .presentation__backblur{
+        width: 100vw;
+    }
 }
 
 @media (max-width:450px){
