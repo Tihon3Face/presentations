@@ -19,7 +19,7 @@ function Navigation() {
     }
     return (
         <div className="navigation">
-            <Link to="/" className='logo'>PRESENTATIONS</Link>
+            <Link to="/presentations" className='logo'>PRESENTATIONS</Link>
             <div className="links">
                 {
                     isAuthenticated && isLogout
